@@ -30,12 +30,16 @@ legs = [squat, deadlift, lunge, leg_curl, calf_raise, leg_misc]
 shoulders = [shoulder_press, lateral_raise, rear_delts, front_raise, trap]
 
 workouts = [chest_tris]
+difficulty = ["light", "heavy"]
 selected_workout = []
 
 def select_chest_tris():
     for exercise in chest_tris:
-        seed = random.randint(0, len(exercise) - 1)
-        selected_workout.append(exercise[seed])
+        set_seed = random.randint(0, len(exercise) - 1)
+        rep_seed = random.randint(0, len(difficulty) - 1)
+        workout = exercise[set_seed]
+        reps = difficulty[rep_seed]
+        selected_workout.append((workout, reps))
 
 def display_workout():
     print(selected_workout)
