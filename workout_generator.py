@@ -1,6 +1,9 @@
 import random
+import sys
+from easygui import *
 
-difficulty = ["light", "heavy"]
+difficulty = ["(light cuz ur soft)", "(heavy bcuz we love it)"]
+days = ["Chest/Tris", "Back/Bis", "Leg", "Shoulder"]
 
 incline_press = ["Incline Dumbbell Press", "Incline Barbell Press"]
 flat_press = ["Flat Dumbbell Press", "Flat Barbell Press", "Decline Barbell Press"]
@@ -33,13 +36,16 @@ shoulders = [shoulder_press, lateral_raise, rear_delts, front_raise, trap]
 
 workouts = [chest_tris, back_bis, legs, shoulders]
 selected_workout = []
+selected_day = []
 
 def display_workout():
     print(selected_workout)
+    print(selected_day[0])
 
 def select_workout():
-    seed = random.randint(0, len(workouts) - 1)
-    for exercise in workouts[seed]:
+    day_seed = random.randint(0, len(workouts) - 1)
+    selected_day.append(days[day_seed])
+    for exercise in workouts[day_seed]:
         set_seed = random.randint(0, len(exercise) - 1)
         rep_seed = random.randint(0, len(difficulty) - 1)
         workout = exercise[set_seed]
@@ -49,4 +55,23 @@ def select_workout():
 if __name__ == "__main__":
     select_workout()
     display_workout()
+
+    while 1:
+        msgbox("Hello, world!")
+
+        msg = "What is your favorite flavor?"
+        title = "Ice Cream Survey"
+        choices = ["Vanilla", "Chocolate", "Strawberry", "Rocky Road"]
+        choice = choicebox(msg, title, choices)
+
+        # note that we convert choice to string, in case
+        # the user cancelled the choice, and we got None.
+        msgbox("You chose: " + str(choice), "Survey Result")
+
+        msg = "Do you want to continue?"
+        title = "Please Confirm"
+        if ccbox(msg, title):  # show a Continue/Cancel dialog
+            pass  # user chose Continue
+        else:
+            sys.exit(0)  # user chose Cancel
 
