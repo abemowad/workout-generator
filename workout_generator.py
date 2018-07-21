@@ -2,7 +2,7 @@ import random
 import sys
 from easygui import *
 
-difficulty = ["(light cuz ur soft)", "(heavy bcuz we love it)"]
+difficulty = ["(light reps cuz ur soft)", "(heavy reps bcuz we love it)"]
 days = ["Chest/Tris", "Back/Bis", "Leg", "Shoulder"]
 
 incline_press = ["Incline Dumbbell Press", "Incline Barbell Press"]
@@ -38,9 +38,27 @@ workouts = [chest_tris, back_bis, legs, shoulders]
 selected_workout = []
 selected_day = []
 
+def create_workout_str():
+    workout_str = "It's " + str(selected_day[0]) + " Day bitch!!!!\n\n"
+    for exercise in selected_workout:
+        workout_str += exercise[0] + ", " + exercise[1] + "\n"
+    return workout_str
+
 def display_workout():
-    print(selected_workout)
-    print(selected_day[0])
+    workout_str = create_workout_str()
+
+    first_image = "fattymatty.gif"
+    msgbox("It's da boiiiiiiiiiii!!!!!!!!!!!!!!!!!!!", image=first_image)
+
+    msg = "u sure u wanna workout today?"
+    title = "don't be soft"
+    choices = ["Yes", "Fuck Yes"]
+    choicebox(msg, title, choices)
+
+    second_image = "buffmatty.gif"
+    msgbox(workout_str)
+    msgbox("MattyIce is bout to be lookin' MattyNice ;)", image=second_image)
+    print(workout_str)
 
 def select_workout():
     day_seed = random.randint(0, len(workouts) - 1)
@@ -56,22 +74,4 @@ if __name__ == "__main__":
     select_workout()
     display_workout()
 
-    while 1:
-        msgbox("Hello, world!")
-
-        msg = "What is your favorite flavor?"
-        title = "Ice Cream Survey"
-        choices = ["Vanilla", "Chocolate", "Strawberry", "Rocky Road"]
-        choice = choicebox(msg, title, choices)
-
-        # note that we convert choice to string, in case
-        # the user cancelled the choice, and we got None.
-        msgbox("You chose: " + str(choice), "Survey Result")
-
-        msg = "Do you want to continue?"
-        title = "Please Confirm"
-        if ccbox(msg, title):  # show a Continue/Cancel dialog
-            pass  # user chose Continue
-        else:
-            sys.exit(0)  # user chose Cancel
 
