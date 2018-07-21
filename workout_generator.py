@@ -1,5 +1,7 @@
 import random
 
+difficulty = ["light", "heavy"]
+
 incline_press = ["Incline Dumbbell Press", "Incline Barbell Press"]
 flat_press = ["Flat Dumbbell Press", "Flat Barbell Press", "Decline Barbell Press"]
 tricep_up = ["Cable Overhead Extension", "Skullcrushers", "Close-Grip Bench"]
@@ -29,29 +31,22 @@ back_bis = [row, lat_pull, bicep_pull, bicep_curl]
 legs = [squat, deadlift, lunge, leg_curl, calf_raise, leg_misc]
 shoulders = [shoulder_press, lateral_raise, rear_delts, front_raise, trap]
 
-workouts = [chest_tris]
-difficulty = ["light", "heavy"]
+workouts = [chest_tris, back_bis, legs, shoulders]
 selected_workout = []
 
-def select_chest_tris():
-    for exercise in chest_tris:
+def display_workout():
+    print(selected_workout)
+
+def select_workout():
+    seed = random.randint(0, len(workouts) - 1)
+    for exercise in workouts[seed]:
         set_seed = random.randint(0, len(exercise) - 1)
         rep_seed = random.randint(0, len(difficulty) - 1)
         workout = exercise[set_seed]
         reps = difficulty[rep_seed]
         selected_workout.append((workout, reps))
 
-def display_workout():
-    print(selected_workout)
-
-def select_workout(seed):
-    workout = {
-        1: select_chest_tris
-    }
-    workout[seed]()
-
 if __name__ == "__main__":
-    seed = random.randint(1, len(workouts))
-    select_workout(seed)
+    select_workout()
     display_workout()
 
